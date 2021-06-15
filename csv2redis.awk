@@ -70,7 +70,15 @@ function toRedisProtocol(redisKey, recordUid, numberOfKeysAndValues, keys, value
     for(i=1;i<=numberOfValues;i++)
     {
     	result= result "$" length(keys[i]) linefeed keys[i] linefeed
-	result= result "$" length(values[i]) linefeed values[i] linefeed
+	if(values[i])
+	{
+		result = result "$" length(values[i]) linefeed values[i] linefeed
+	
+	}
+	else
+	{
+		result = result "$" "1" linefeed "." linefeed
+	}
     }
     return result
 } 
